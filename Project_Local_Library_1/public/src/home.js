@@ -1,18 +1,24 @@
+//new helper function 
+function topFive(array) {
+  return array.sort((a, b) => a.count < b.count ? 1 : -1).slice(0, 5);
+}
+
+
 function getTotalBooksCount(books) {
   let total = books.length;
-  return total;
+    return total;
 }
 
 function getTotalAccountsCount(accounts) {
   let total = accounts.length;
-  return total;
+    return total;
 }
 
 function getBooksBorrowedCount(books) {
   let array = [];
   for (let i = 0; i < books.length; i++){
-  if (books[i].borrows[0].returned === false){
-    array.push(books[i]);
+    if (books[i].borrows[0].returned === false){
+      array.push(books[i]);
 }
 }
 
@@ -36,7 +42,7 @@ for (let genre in newGenre) {
 const count = newGenre[genre];
 list.push({name: `${genre}`, count: count});
 }  
-return list.sort((a, b) => (a.count < b.count) ? 1:-1).slice(0, 5)
+return topFive(list)
 }
 
 
@@ -45,17 +51,17 @@ return list.sort((a, b) => (a.count < b.count) ? 1:-1).slice(0, 5)
 function getMostPopularBooks(books) {
 let array = [];
 books.forEach((book) => array.push({name: book.title, count: book.borrows.length}))
-return array.sort((a, b) => a.count < b.count ? 1 : -1).slice(0,5);
+return topFive(array)
 }
 
 
 function getMostPopularAuthors(books, authors) {
 array = [];
-for (let author of authors) {
-const fullName = `${author.name.first} ${author.name.last}`;
+  for (let author of authors) {
+    const fullName = `${author.name.first} ${author.name.last}`;
 let count = 0;
-for (let book of books) {
-if (author.id === book.authorId) {
+  for (let book of books) {
+    if (author.id === book.authorId) {
 count += book.borrows.length;
 }
 }
@@ -63,7 +69,7 @@ count += book.borrows.length;
   array.push(result);
 }
 
-return array.sort((a, b) => (a.count < b.count) ? 1 : -1).slice(0, 5);
+return topFive(array)
 }
 
 
